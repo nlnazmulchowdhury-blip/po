@@ -1,0 +1,53 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "hero-banner",
+      "description": "Featured movie cinematic banner",
+      "imageUrl": "https://picsum.photos/seed/cinema1/1920/1080",
+      "imageHint": "cinematic movie"
+    },
+    {
+      "id": "movie-1",
+      "description": "Action movie poster",
+      "imageUrl": "https://picsum.photos/seed/action1/600/400",
+      "imageHint": "action movie"
+    },
+    {
+      "id": "movie-2",
+      "description": "Sci-fi movie poster",
+      "imageUrl": "https://picsum.photos/seed/scifi1/600/400",
+      "imageHint": "sci-fi movie"
+    },
+    {
+      "id": "movie-3",
+      "description": "Comedy movie poster",
+      "imageUrl": "https://picsum.photos/seed/comedy1/600/400",
+      "imageHint": "comedy movie"
+    },
+    {
+      "id": "movie-4",
+      "description": "Drama movie poster",
+      "imageUrl": "https://picsum.photos/seed/drama1/600/400",
+      "imageHint": "drama movie"
+    },
+    {
+      "id": "movie-5",
+      "description": "Horror movie poster",
+      "imageUrl": "https://picsum.photos/seed/horror1/600/400",
+      "imageHint": "horror movie"
+    },
+    {
+      "id": "movie-6",
+      "description": "Documentary poster",
+      "imageUrl": "https://picsum.photos/seed/doc1/600/400",
+      "imageHint": "documentary movie"
+    },
+    {
+      "id": "avatar-user",
+      "description": "User profile avatar",
+      "imageUrl": "https://picsum.photos/seed/user1/100/100",
+      "imageHint": "user profile"
+    }
+  ]
+}

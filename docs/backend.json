@@ -1,0 +1,138 @@
+
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Information about the registered user and their role.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["admin", "user"], "description": "The user's access level." },
+        "bio": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "emailVerified": { "type": "boolean", "default": false },
+        "verificationToken": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Movie": {
+      "title": "Movie",
+      "description": "Details about a movie in the library.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "duration": { "type": "string" },
+        "views": { "type": "number" },
+        "likesCount": { "type": "number", "default": 0 },
+        "releaseDate": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "category", "thumbnail"]
+    },
+    "Like": {
+      "title": "Like",
+      "description": "Information about a user's like on a movie.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "movieId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "movieId"]
+    },
+    "Comment": {
+      "title": "Movie Comment",
+      "description": "User comments on a movie, supports nesting via parentId.",
+      "type": "object",
+      "properties": {
+        "movieId": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userPhoto": { "type": "string" },
+        "text": { "type": "string" },
+        "parentId": { "type": "string", "description": "ID of the parent comment if this is a reply." },
+        "likesCount": { "type": "number", "default": 0 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["movieId", "userId", "text"]
+    },
+    "CommentLike": {
+      "title": "Comment Like",
+      "description": "Information about a user's like on a comment.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "commentId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "commentId"]
+    },
+    "Notification": {
+      "title": "User Notification",
+      "description": "Notifications for replies and other activities.",
+      "type": "object",
+      "properties": {
+        "recipientId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "senderPhoto": { "type": "string" },
+        "message": { "type": "string" },
+        "link": { "type": "string" },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["recipientId", "message", "read"]
+    },
+    "PasswordReset": {
+      "title": "Password Reset OTP",
+      "description": "Stores temporary OTP codes for password reset.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "otp": { "type": "string" },
+        "expiresAt": { "type": "string", "format": "date-time" },
+        "used": { "type": "boolean" }
+      },
+      "required": ["email", "otp", "expiresAt"]
+    }
+  },
+  "auth": {
+    "providers": ["password", "google"]
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile data stored in Firestore."
+    },
+    "/movies/{movieId}": {
+      "schema": "Movie",
+      "description": "Movie data stored in Firestore."
+    },
+    "/likes/{likeId}": {
+      "schema": "Like",
+      "description": "Unique likes recorded per user and movie."
+    },
+    "/comments/{commentId}": {
+      "schema": "Comment",
+      "description": "Real-time user comments and replies."
+    },
+    "/commentLikes/{likeId}": {
+      "schema": "CommentLike",
+      "description": "Unique likes recorded per user on a comment."
+    },
+    "/notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "User notifications for interactions."
+    },
+    "/passwordResets/{resetId}": {
+      "schema": "PasswordReset",
+      "description": "Temporary OTP codes for verification."
+    }
+  }
+}
