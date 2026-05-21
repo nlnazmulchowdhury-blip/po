@@ -24,6 +24,8 @@ jobs:
 
     - name: 🏗️ Build Static Site
       run: npm run build
+      env:
+        UNAUX_STATIC_EXPORT: 'true'
 
     - name: 📂 Sync HTML files to VistaPanel
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
