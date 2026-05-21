@@ -17,15 +17,15 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 18
-        cache: 'npm'
 
     - name: 📦 Install dependencies
-      run: npm ci
+      run: npm install --legacy-peer-deps
 
     - name: 🏗️ Build Static Site
-      run: npm run build
+      # এখানে env সেট করার কারণে আপনার next.config-এর 'isStaticExport' ট্রু (true) হবে
       env:
         UNAUX_STATIC_EXPORT: 'true'
+      run: npm run build
 
     - name: 📂 Sync HTML files to VistaPanel
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -35,4 +35,4 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./out/
         server-dir: ./htdocs/
-        dangerous-clean-slate: false  # এটি আপনার হোস্টিংয়ে থাকা ডাটাবেজ বা অন্য কোনো আপলোডেড ফাইল কখনোই ডিলিট করবে না
+        dangerous-clean-slate: false
