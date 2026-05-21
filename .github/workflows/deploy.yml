@@ -22,10 +22,11 @@ jobs:
       run: npm install --legacy-peer-deps
 
     - name: 🏗️ Build Static Site
-      # এখানে env সেট করার কারণে আপনার next.config-এর 'isStaticExport' ট্রু (true) হবে
       env:
         UNAUX_STATIC_EXPORT: 'true'
-      run: npm run build
+      run: |
+        npm run build
+        ls -la  # এটি রান করলে গিটহাব লগে দেখা যাবে আসলেই 'out' ফোল্ডার তৈরি হয়েছে কি না
 
     - name: 📂 Sync HTML files to VistaPanel
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
